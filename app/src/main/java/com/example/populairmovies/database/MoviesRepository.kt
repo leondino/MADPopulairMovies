@@ -5,5 +5,5 @@ import java.time.Year
 class MoviesRepository {
     private val moviesApi: MoviesApiService = MoviesApi.createApi()
 
-    fun getMostPopulairMovies(year: String) = moviesApi.getMostPopulairMovies(year)
+    fun getMostPopulairMovies(year: Int) = moviesApi.getMostPopulairMovies(year)
 }
