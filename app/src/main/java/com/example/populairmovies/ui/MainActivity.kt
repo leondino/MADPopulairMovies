@@ -16,8 +16,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private var movies = arrayListOf<Movie>()
-    private val movieAdapter = MovieAdapter(movies) { movie -> onMovieClick(movie) }
-    private lateinit var viewModel: MainActivityViewModel
+    private val movieAdapter = MovieAdapter(movies,this) { movie -> onMovieClick(movie) }
+    public lateinit var viewModel: MainActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +46,8 @@ class MainActivity : AppCompatActivity() {
         viewModel.error.observe(this, Observer {
             Toast.makeText(this, it, Toast.LENGTH_LONG).show()
         })
+
+        viewModel.getApiConfigurations()
     }
 
     private fun onMovieClick(movie: Movie) {

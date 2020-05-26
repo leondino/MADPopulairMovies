@@ -11,7 +11,8 @@ import com.example.populairmovies.R
 import com.example.populairmovies.model.Movie
 import kotlinx.android.synthetic.main.item_movie.view.*
 
-class MovieAdapter(private val movies: List<Movie>, private  val onClick: (Movie) -> Unit) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+class MovieAdapter(private val movies: List<Movie>, private val mainActivity: MainActivity,
+                   private  val onClick: (Movie) -> Unit) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
     private lateinit var context: Context
 
     inner class ViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -24,7 +25,9 @@ class MovieAdapter(private val movies: List<Movie>, private  val onClick: (Movie
         fun bind(movie: Movie){
             //itemView.tvNumber.text = "${movies[adapterPosition]}."
             itemView.tvNumber.text = movie.title
-            Glide.with(context).load(movie.poster_path).into(itemView.ivMovie)
+            Glide.with(context).load(mainActivity.viewModel.configurations?.imageConfigurations?.base_url+
+                    mainActivity.viewModel.configurations?.imageConfigurations?.poster_sizes?.get(3)+
+                    movie.poster_path).into(itemView.ivMovie)
         }
     }
 

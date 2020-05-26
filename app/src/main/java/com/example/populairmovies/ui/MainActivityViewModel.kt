@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.populairmovies.database.MoviesRepository
+import com.example.populairmovies.model.ConfigurationsResult
 import com.example.populairmovies.model.Result
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,6 +16,7 @@ class MainActivityViewModel(application: Application): AndroidViewModel(applicat
     private val moviesRepository = MoviesRepository()
     val result = MutableLiveData<Result>()
     val error = MutableLiveData<String>()
+    var configurations: ConfigurationsResult? = null
 
     fun getPopulairMovies(year: Int){
         moviesRepository.getMostPopulairMovies(year).enqueue(object : Callback<Result>{
@@ -24,6 +26,19 @@ class MainActivityViewModel(application: Application): AndroidViewModel(applicat
             }
 
             override fun onFailure(call: Call<Result>, t: Throwable) {
+                error.value = t.message
+            }
+        })
+    }
+
+    fun getApiConfigurations(){
+        moviesRepository.getApiConfigurations().enqueue(object : Callback<ConfigurationsResult>{
+            override fun onResponse(call: Call<ConfigurationsResult>, response: Response<ConfigurationsResult>) {
+                if (response.isSuccessful) configurations = response.body()
+                else error.value = "An error occurred: ${response.errorBody().toString()}"
+            }
+
+            override fun onFailure(call: Call<ConfigurationsResult>, t: Throwable) {
                 error.value = t.message
             }
         })
