@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.populairmovies.R
 import com.example.populairmovies.model.Movie
@@ -26,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews(){
-        rvMovies.layoutManager = GridLayoutManager(this, 2, RecyclerView.HORIZONTAL, false )
+        rvMovies.layoutManager = GridLayoutManager(this, 2, RecyclerView.VERTICAL, false )
         rvMovies.adapter = movieAdapter
         btnSubmit.setOnClickListener{
             viewModel.getPopulairMovies(etYear.text.toString().toInt())
@@ -37,7 +38,8 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
 
         viewModel.result.observe(this, Observer{
-            movies = it?.results as ArrayList<Movie>
+            movies.clear()
+            movies.addAll(it.results)
             movieAdapter.notifyDataSetChanged()
         })
 
