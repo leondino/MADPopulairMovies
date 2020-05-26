@@ -1,5 +1,6 @@
 package com.example.populairmovies.ui
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -19,8 +20,10 @@ class MovieAdapter(private val movies: List<Movie>, private  val onClick: (Movie
                 onClick(movies[adapterPosition])
             }
         }
+        @SuppressLint("SetTextI18n")
         fun bind(movie: Movie){
-            itemView.tvNumber.text = movies[adapterPosition].toString() + '.'
+            itemView.tvNumber.text = "${movies[adapterPosition]}."
+            itemView.tvNumber.text = movie.title
             Glide.with(context).load(movie.poster_path).into(itemView.ivMovie)
         }
     }
