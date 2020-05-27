@@ -12,6 +12,7 @@ import com.example.populairmovies.R
 import com.example.populairmovies.model.Movie
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.item_movie.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,6 +41,9 @@ class MainActivity : AppCompatActivity() {
         viewModel.result.observe(this, Observer{
             movies.clear()
             movies.addAll(it.results)
+            //Give position number so it can be used in bind method of recycler view
+            for(movie in movies)
+                movie.number = movies.indexOf(movie) + 1
             movieAdapter.notifyDataSetChanged()
         })
 

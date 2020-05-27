@@ -23,10 +23,9 @@ class MovieAdapter(private val movies: List<Movie>, private val mainActivity: Ma
         }
 
         fun bind(movie: Movie){
-            //itemView.tvNumber.text = "${movies[adapterPosition]}."
-            itemView.tvNumber.text = movie.title
+            itemView.tvNumber.text = context.getString(R.string.number, movie.number)
             Glide.with(context).load(mainActivity.viewModel.configurations?.imageConfigurations?.base_url+
-                    mainActivity.viewModel.configurations?.imageConfigurations?.poster_sizes?.get(3)+
+                    mainActivity.viewModel.configurations?.imageConfigurations?.poster_sizes?.get(4)+
                     movie.poster_path).into(itemView.ivMovie)
         }
     }
