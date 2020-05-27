@@ -5,4 +5,6 @@
     <string name="submit">submit</string>
     <string name="movie">movie</string>
     <string name="number">%d.</string>
+    <string name="overview">Overview</string>
+    <string name="star">Star</string>
 </resources>

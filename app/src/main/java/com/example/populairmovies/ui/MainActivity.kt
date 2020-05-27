@@ -1,5 +1,6 @@
 package com.example.populairmovies.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -13,6 +14,8 @@ import com.example.populairmovies.model.Movie
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_movie.*
+
+const val EXTRA_MOVIE = "EXTRA_MOVIE"
 
 class MainActivity : AppCompatActivity() {
 
@@ -56,6 +59,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun onMovieClick(movie: Movie) {
         Snackbar.make(rvMovies, "This movie is called: ${movie.title}", Snackbar.LENGTH_LONG).show()
+        val movieIntent = Intent(this, MovieActivity::class.java)
+        movieIntent.putExtra(EXTRA_MOVIE, movie)
+        startActivity(movieIntent)
     }
 
 }
