@@ -25,9 +25,9 @@ class MovieActivity : AppCompatActivity() {
         tvRating.text = movie?.vote_average.toString()
         tvSummary.text = movie?.overview
         tvTitle.text = movie?.title
-        tvRelease.text = movie?.release_date
+        tvRelease.text = getString(R.string.release_date, movie?.release_date)
         Glide.with(this).load(imageConfigurations?.base_url+
-                imageConfigurations?.poster_sizes?.get(4)+
+                imageConfigurations?.poster_sizes?.get(3)+
                 movie?.poster_path).into(ivPoster)
         Glide.with(this).load(imageConfigurations?.base_url+
                 imageConfigurations?.backdrop_sizes?.get(1)+
